@@ -5,19 +5,16 @@
   
   <title>Hexo Blogs | My Hexo Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="This blogIs written in hexo. Hexo is simply a node prject that presents markdown files in a pretty way (as a blog)
-With the admin plugin it almost fells like wordpress, but with all the code completly">
+  <meta name="description" content="This blogIs written in hexo. Hexo is simply a node project that presents markdown files in a pretty way (as a blog). As its markdown its pretty convinient for a blog about development, as you will fin">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hexo Blogs">
 <meta property="og:url" content="http://yoursite.com/2017/02/24/Hexo-Blogs/index.html">
 <meta property="og:site_name" content="My Hexo Blog">
-<meta property="og:description" content="This blogIs written in hexo. Hexo is simply a node prject that presents markdown files in a pretty way (as a blog)
-With the admin plugin it almost fells like wordpress, but with all the code completly">
-<meta property="og:updated_time" content="2017-02-24T21:33:36.990Z">
+<meta property="og:description" content="This blogIs written in hexo. Hexo is simply a node project that presents markdown files in a pretty way (as a blog). As its markdown its pretty convinient for a blog about development, as you will fin">
+<meta property="og:updated_time" content="2017-02-28T20:58:57.745Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo Blogs">
-<meta name="twitter:description" content="This blogIs written in hexo. Hexo is simply a node prject that presents markdown files in a pretty way (as a blog)
-With the admin plugin it almost fells like wordpress, but with all the code completly">
+<meta name="twitter:description" content="This blogIs written in hexo. Hexo is simply a node project that presents markdown files in a pretty way (as a blog). As its markdown its pretty convinient for a blog about development, as you will fin">
   
     <link rel="alternate" href="/atom.xml" title="My Hexo Blog" type="application/atom+xml">
   
@@ -55,9 +52,9 @@ With the admin plugin it almost fells like wordpress, but with all the code comp
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Søk"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
@@ -88,13 +85,19 @@ With the admin plugin it almost fells like wordpress, but with all the code comp
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="This-blog"><a href="#This-blog" class="headerlink" title="This blog"></a>This blog</h2><p>Is written in hexo. Hexo is simply a node prject that presents markdown files in a pretty way (as a blog)</p>
-<p>With the admin plugin it almost fells like wordpress, but with all the code completly customizable.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+        <h2 id="This-blog"><a href="#This-blog" class="headerlink" title="This blog"></a>This blog</h2><p>Is written in hexo. Hexo is simply a node project that presents markdown files in a pretty way (as a blog). As its markdown its pretty convinient for a blog about development, as you will find a lot of documentation in this format. </p>
+<p>With the admin plugin it almost fells like wordpress, but with all the code completly customizable. The plugin makes it way easier to manage your blog.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// This <span class="built_in">command</span> will generate all the static files that you need <span class="keyword">for</span> your blog</span><br><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//This <span class="built_in">command</span> simply starts the server, so you can see you blog before you deploy it.</span><br><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<h6 id="Deploy-host"><a href="#Deploy-host" class="headerlink" title="Deploy/host"></a>Deploy/host</h6><p>How to host and deploy your blog is up to you. Every hexo blog comes with a _config.yml file, for all the settings of your project. One of the things you can specify is, what and where you want to deploy your static files.<br>In depth you can read more about it here: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Hexo documentation</a></p>
+<p>I have set this up to github pages, as this blog only consists of static files.<br>My deploy configuration looks like the following.</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line"><span class="attr">  type:</span> git</span><br><span class="line"><span class="attr">  repository:</span> https://github.com/emilhein/emilhein.github.com.git</span><br><span class="line"><span class="attr">  branch:</span> master</span><br></pre></td></tr></table></figure>
+<p>Then when i run the floowing command my files will be deployed and saved in sourcecontrol<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// This <span class="built_in">command</span> will generate all the static files that you need <span class="keyword">for</span> your blog</span><br><span class="line">$ hexo deploy [commit message]</span><br></pre></td></tr></table></figure></p>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/02/24/Hexo-Blogs/" data-id="cizkbzc1e0001aoo0bceot8kq" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2017/02/24/Hexo-Blogs/" data-id="cizoj2esc000464o06v9rcoo8" class="article-share-link">Share</a>
       
       
     </footer>
@@ -105,7 +108,7 @@ With the admin plugin it almost fells like wordpress, but with all the code comp
   
   
     <a href="/2017/01/16/Promises/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Ancien</strong>
+      <strong class="article-nav-caption">Older</strong>
       <div class="article-nav-title">Promises</div>
     </a>
   
@@ -128,7 +131,7 @@ With the admin plugin it almost fells like wordpress, but with all the code comp
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
+    <h3 class="widget-title">Arkiv</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li></ul>
     </div>
@@ -138,7 +141,7 @@ With the admin plugin it almost fells like wordpress, but with all the code comp
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Articles récents</h3>
+    <h3 class="widget-title">Siste innlegg</h3>
     <div class="widget">
       <ul>
         
@@ -171,7 +174,7 @@ With the admin plugin it almost fells like wordpress, but with all the code comp
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2017 Emil Hein<br>
-      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
