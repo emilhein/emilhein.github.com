@@ -4,7 +4,8 @@ my blog man!
 
 stuff like this
 
-´´´js
+```js
+
 async function asyncTask () {
     return 4;
 }
@@ -17,4 +18,5 @@ asyncTask()
 .then(asyncTask2)
 .then(console.log)
 .catch(console.error);
-´´´
+
+```
