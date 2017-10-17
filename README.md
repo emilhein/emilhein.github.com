@@ -33,5 +33,25 @@ asyncTask()
 .catch(console.error);
 
 
+const fastFunction = input => {
+    return new Promise((resolve, reject) => {
+        setTimeout(function () {
+            resolve(input);
+        }, 100);
+    });
+};
+
+const slowFunction = input => {
+    return new Promise((resolve, reject) => {
+        setTimeout(function () {
+            resolve(input + ' and Hi');
+        }, 300);
+    });
+};
+
+fastFunction('you')
+.then(slowFunction)
+.then(console.log);
+
 
 ```
