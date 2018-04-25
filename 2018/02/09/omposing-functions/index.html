@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- hexo-inject:begin --><script src='https://unpkg.com/echarts@3.3.2/dist/echarts.min.js'></script><!-- hexo-inject:end --><!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="Hi there, Earlier in the post about classes vs composition i mention some of the same ideas briefly. The basic idea with a compose or a pipe function is, that it takes an arbitrary number of functions">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Composing functions">
+<meta property="og:url" content="http://emilhein.github.io/2018/02/09/omposing-functions/index.html">
+<meta property="og:site_name" content="Emil Hein">
+<meta property="og:description" content="Hi there, Earlier in the post about classes vs composition i mention some of the same ideas briefly. The basic idea with a compose or a pipe function is, that it takes an arbitrary number of functions">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-04-25T16:23:23.830Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Composing functions">
+<meta name="twitter:description" content="Hi there, Earlier in the post about classes vs composition i mention some of the same ideas briefly. The basic idea with a compose or a pipe function is, that it takes an arbitrary number of functions">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>Composing functions</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- rss -->
+    
+    
+<link rel="stylesheet" href="/css/prism-atom-dark.css" type="text/css"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+
+<body>
+    
+      <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="header-post">
+  <a id="menu-icon" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/About/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/emilhein">Projects</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/2017/12/07/Node-8-functions/"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://emilhein.github.io/2018/02/09/omposing-functions/"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://emilhein.github.io/2018/02/09/omposing-functions/&text=Composing functions"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://emilhein.github.io/2018/02/09/omposing-functions/&title=Composing functions"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://emilhein.github.io/2018/02/09/omposing-functions/&is_video=false&description=Composing functions"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Composing functions&body=Check out this article: http://emilhein.github.io/2018/02/09/omposing-functions/"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://emilhein.github.io/2018/02/09/omposing-functions/&title=Composing functions"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://emilhein.github.io/2018/02/09/omposing-functions/&title=Composing functions"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://emilhein.github.io/2018/02/09/omposing-functions/&title=Composing functions"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://emilhein.github.io/2018/02/09/omposing-functions/&title=Composing functions"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://emilhein.github.io/2018/02/09/omposing-functions/&name=Composing functions&description="><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index width mx-auto px2 my4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Composing functions
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Emil Hein</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2018-02-09T23:10:33.000Z" itemprop="datePublished">2018-02-09</time>
+    </div>
+
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>Hi there,</p>
+<p>Earlier in the post about classes vs composition i mention some of the same ideas briefly.</p>
+<p>The basic idea with a <strong>compose</strong> or a <strong>pipe</strong> function is, that it takes an arbitrary number of functions and passes the return values from one to the next. <strong>compose</strong> does it from rigth to left and <strong>pipe</strong> does it from left to rigth.</p>
+<p>First example without composing is:</p>
+<pre class=" language-js"><code class="language-js"><span class="token keyword">const</span> function1 <span class="token operator">=</span> input <span class="token operator">=</span><span class="token operator">></span> <span class="token template-string"><span class="token string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>input<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string"> m^2`</span></span>
+<span class="token keyword">const</span> function2 <span class="token operator">=</span> input <span class="token operator">=</span><span class="token operator">></span> <span class="token template-string"><span class="token string">`I would like a house that is more than </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>input<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string"> big`</span></span>
+
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">function2</span><span class="token punctuation">(</span><span class="token function">function1</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// I would like a house that is more than 2 m^2 big</span>
+
+</code></pre>
+<p>Already with one function passed into the other it looks a bit silly. If you image having more input functions, it quickly becomes very unreadable. </p>
+<p>The same exmpla with a compose function:</p>
+<pre class=" language-js"><code class="language-js"><span class="token keyword">const</span> function1 <span class="token operator">=</span> input <span class="token operator">=</span><span class="token operator">></span> <span class="token template-string"><span class="token string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>input<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string"> m^2`</span></span>
+<span class="token keyword">const</span> function2 <span class="token operator">=</span> input <span class="token operator">=</span><span class="token operator">></span> <span class="token template-string"><span class="token string">`I would like a house that is more than </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>input<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string"> big`</span></span>
+
+<span class="token keyword">const</span> compose <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token operator">...</span>fns<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span>
+    fns<span class="token punctuation">.</span><span class="token function">reverse</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">reduce</span><span class="token punctuation">(</span><span class="token punctuation">(</span>prevFn<span class="token punctuation">,</span> nextFn<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span>
+        value <span class="token operator">=</span><span class="token operator">></span> <span class="token function">nextFn</span><span class="token punctuation">(</span><span class="token function">prevFn</span><span class="token punctuation">(</span>value<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        value <span class="token operator">=</span><span class="token operator">></span> value
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> example <span class="token operator">=</span> <span class="token function">compose</span><span class="token punctuation">(</span>
+    function2<span class="token punctuation">,</span>
+    function1
+<span class="token punctuation">)</span><span class="token punctuation">;</span>    
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">example</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// I would like a house that is more than 2 m^2 big</span>
+</code></pre>
+<p>Now that was a lot more code, to do the same thing, but.<br>If you already have the compose function you can start building easy to read function flows, that passes output from function as input to the next function.</p>
+<p>Finally.. Lodash also has a version of compose that can make the whole thing a lot more smooth:</p>
+<pre class=" language-js"><code class="language-js"><span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> _ <span class="token keyword">from</span> <span class="token string">'lodash'</span>
+
+<span class="token keyword">const</span> function1 <span class="token operator">=</span> input <span class="token operator">=</span><span class="token operator">></span> <span class="token template-string"><span class="token string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>input<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string"> m^2`</span></span>
+<span class="token keyword">const</span> function2 <span class="token operator">=</span> input <span class="token operator">=</span><span class="token operator">></span> <span class="token template-string"><span class="token string">`I would like a house that is more than </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>input<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string"> big`</span></span>
+
+<span class="token keyword">const</span> lodashWay <span class="token operator">=</span> _<span class="token punctuation">.</span><span class="token function">flowRight</span><span class="token punctuation">(</span>function2<span class="token punctuation">,</span> function1<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">lodashWay</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// I would like a house that is more than 2 m^2 big</span>
+
+</code></pre>
+<p>With libaries like ramda, you can do super cool function compositions, that uses functional programming when its best:</p>
+<pre class=" language-js"><code class="language-js"><span class="token keyword">const</span> R <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'ramda'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">let</span> diffFromNow <span class="token operator">=</span> date <span class="token operator">=</span><span class="token operator">></span> <span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span>date<span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> fromMiliTominutes <span class="token operator">=</span> milli <span class="token operator">=</span><span class="token operator">></span> R<span class="token punctuation">.</span><span class="token function">divide</span><span class="token punctuation">(</span>milli<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">1000</span> <span class="token operator">*</span> <span class="token number">60</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> dateMoreThan1HourAgo <span class="token operator">=</span> R<span class="token punctuation">.</span><span class="token function">compose</span><span class="token punctuation">(</span>
+    R<span class="token punctuation">.</span><span class="token function">gte</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>__<span class="token punctuation">,</span> <span class="token number">60</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    Math<span class="token punctuation">.</span>round<span class="token punctuation">,</span>
+    fromMiliTominutes<span class="token punctuation">,</span>
+    diffFromNow<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">let</span> date <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> diff <span class="token operator">=</span> <span class="token function">dateMoreThan1HourAgo</span><span class="token punctuation">(</span>date<span class="token punctuation">.</span><span class="token function">setHours</span><span class="token punctuation">(</span>date<span class="token punctuation">.</span><span class="token function">getHours</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>diff<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// true</span>
+</code></pre>
+<p>In the exmaple above i use some of the build in functions in Ramda, like compose (same af lodash flowright())</p>
+
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/About/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/emilhein">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://emilhein.github.io/2018/02/09/omposing-functions/"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://emilhein.github.io/2018/02/09/omposing-functions/&text=Composing functions"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://emilhein.github.io/2018/02/09/omposing-functions/&title=Composing functions"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://emilhein.github.io/2018/02/09/omposing-functions/&is_video=false&description=Composing functions"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Composing functions&body=Check out this article: http://emilhein.github.io/2018/02/09/omposing-functions/"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://emilhein.github.io/2018/02/09/omposing-functions/&title=Composing functions"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://emilhein.github.io/2018/02/09/omposing-functions/&title=Composing functions"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://emilhein.github.io/2018/02/09/omposing-functions/&title=Composing functions"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://emilhein.github.io/2018/02/09/omposing-functions/&title=Composing functions"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://emilhein.github.io/2018/02/09/omposing-functions/&name=Composing functions&description="><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <ul>
+        <li id="toc"><a class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
+        <li id="share"><a class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
+        <li id="top" style="display:none"><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
+        <li id="menu"><a class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2018 Emil Hein
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/About/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/emilhein">Projects</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</body>
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="/lib/meslo-LG/styles.css">
+<link rel="stylesheet" href="/lib/justified-gallery/justifiedGallery.min.css">
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Disqus Comments -->
+
+
